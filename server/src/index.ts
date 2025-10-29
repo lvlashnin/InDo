@@ -1,5 +1,5 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
 import todoRoutes from "./routes/todos.js";
 
@@ -10,9 +10,15 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI as string;
 
+// mongoose
+//   .connect(MONGO_URI)
+//   .then(() => console.log("MongoDB connected"))
+//   .catch((err) => console.error("MongoDB error:", err));
 mongoose
   .connect(MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
+  .then(() => {
+    console.log("MongoDB connected to db:", mongoose.connection.name);
+  })
   .catch((err) => console.error("MongoDB error:", err));
 
 app.use("/api/todos", todoRoutes);
