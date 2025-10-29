@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import todoRoutes from "./routes/todos.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,8 @@ mongoose
   .connect(MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB error:", err));
+
+app.use("/api/todos", todoRoutes);
 
 app.get("/", (req, res) => res.send("Server is running"));
 
