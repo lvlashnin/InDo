@@ -6,14 +6,11 @@ import todoRoutes from "./routes/todos.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
+console.log("MONGO_URI:", process.env.MONGO_URI);
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI as string;
 
-// mongoose
-//   .connect(MONGO_URI)
-//   .then(() => console.log("MongoDB connected"))
-//   .catch((err) => console.error("MongoDB error:", err));
 mongoose
   .connect(MONGO_URI)
   .then(() => {
