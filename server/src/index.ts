@@ -2,10 +2,18 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import todoRoutes from "./routes/todos.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: ["https://indo-x6o6.onrender.com", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 console.log("MONGO_URI:", process.env.MONGO_URI);
 
 const PORT = process.env.PORT || 5000;
